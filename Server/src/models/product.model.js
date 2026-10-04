@@ -24,7 +24,8 @@ const productSchema = new mongoose.Schema({
     price : {
         amount : {
             type : Number,
-            required : true
+            required : true,
+            min: [0, "Price cannot be negative"],
         },
         currency : {
             type : String,
@@ -47,7 +48,7 @@ const productSchema = new mongoose.Schema({
         },
     ],
     seller : {
-        type : mongoose.Types.ObjectId,
+        type : mongoose.Schema.Types.ObjectId,
         ref : "user",
         required : true
     }
