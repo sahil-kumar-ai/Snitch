@@ -1,5 +1,5 @@
 import UserModel from "../models/user.model.js";
-import { createUser, isEmailExist } from "../services/auth.services.js";
+import { createUser, isEmailExist } from "../services/auth.service.js";
 import { createAccessToken, createRefreshToken, decodeRefreshToken, isPasswordCorrect } from "../utils/auth.utils.js";
 
 export const registerUserController = async (req, res) => {
