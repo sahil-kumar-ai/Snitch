@@ -6,7 +6,7 @@ const productValidator = [
         .isString().withMessage("Title must be a string").bail()
         .trim()
         .isLength({ min : 2, max : 100 }).withMessage("Title must be in between 2 to 100 charachter").bail()
-        .isAlpha("en-US", { ignore : " " }).withMessage("Tile can contain only english small letter, capital letter and spaces"),
+        .isAlpha("en-US", { ignore : " -" }).withMessage("Tile can contain only english small letter, capital letter and spaces"),
     body("description")
         .exists().withMessage("Please enter an description").bail()
         .isString().withMessage("Description must be a string").bail()
