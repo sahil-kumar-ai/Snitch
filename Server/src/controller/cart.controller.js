@@ -1,7 +1,7 @@
-import CartModel from "../models/cart.model";
-import ProductModel from "../models/product.model";
+import CartModel from "../models/cart.model.js";
+import ProductModel from "../models/product.model.js";
 
-const addToCartController = async (req, res) => {
+export const addToCartController = async (req, res) => {
     const { productId, quantity, size } = req.body;
 
     const product = await ProductModel.findById(productId);
@@ -53,5 +53,14 @@ const addToCartController = async (req, res) => {
 
     res.status(201).json({
         message : "Product added to cart successfully",
+    });
+};
+
+export const getCart = async (req, res) => {
+    const cart = (await CartModel.findOne({ user : req.user.id })) ?? (await CartModel.create({ user : req.user.id }));
+
+    return res.status(200).json({
+        message : "Cart retrived successfully",
+        cart
     });
 };
