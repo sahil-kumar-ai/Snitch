@@ -33,3 +33,65 @@ export const createProduct = async (req, res) => {
         product,
     });
 };
+
+export const listAllProductController = async (req, res) => {
+    const product = await ProductModel.findOne({ publishes : true });
+
+    res.status(200).json({
+        message : "All product fetched successfully",
+        data : [
+            product
+        ]
+    });
+};
+
+export const listAllProductToSellerController = async (req, res) => {
+    const product = await ProductModel.findOne();
+
+    res.status(200).json({
+        message : "All product fetched successfully for seller",
+        data : [
+            product
+        ]
+    });
+};
+
+export const unlistProduct = async (req, res) => {
+    const { id } = req.params;
+
+    const product = ProductModel.findById(id);
+
+    if (!product) {
+        return res.status(400).json({
+            message : "Product not found"
+        });
+    };
+
+    await ProductModel.findByIdAndUpdate(id, 
+        { published : false }
+    );
+
+    res.status(200).json({
+        message : "Product unpublished successfully"
+    });
+};
+
+export const listProduct = async (req, res) => {
+    const { id } = req.params;
+
+    const product = ProductModel.findById(id);
+
+    if (!product) {
+        return res.status(400).json({
+            message : "Product not found"
+        });
+    };
+
+    await ProductModel.findByIdAndUpdate(id, 
+        { published : true }
+    );
+
+    res.status(200).json({
+        message : "Product unpublished successfully"
+    });
+};

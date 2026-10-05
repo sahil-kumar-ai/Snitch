@@ -1,6 +1,6 @@
-import { body } from 'express-validator';
+import { body, param } from 'express-validator';
 
-const productValidator = [
+export const productValidator = [
     body("title")
         .exists().withMessage("Please enter an title").bail()
         .isString().withMessage("Title must be a string").bail()
@@ -33,4 +33,14 @@ const productValidator = [
         .isInt({ min : 0 }).withMessage("Stock must be a integer value"),
 ];
 
-export default productValidator;
+export const unlistProductValidator = [
+    param("id")
+        .exists().withMessage("Product id is needed").bail()
+        .isMongoId().withMessage("ID must be an a valid Mongo ID")
+]
+
+export const listProductValidator = [
+    param("id")
+        .exists().withMessage("Product id is needed").bail()
+        .isMongoId().withMessage("ID must be an a valid Mongo ID")
+]
